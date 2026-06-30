@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="mv_cash_radar.Dashboard" owl="1">
+        <div class="o_action_manager o_cash_radar p-4">
+            <t t-if="state.loading">
+                <div class="text-center p-5 text-muted">
+                    <i class="fa fa-spinner fa-spin fa-3x"/>
+                    <p class="mt-3">Reading the books…</p>
+                </div>
+            </t>
+            <t t-else="">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h1 class="o_cash_title mb-0">Receivables &amp; Payables</h1>
+                    <button class="btn btn-light btn-sm" t-on-click="() => this.load()">
+                        <i class="fa fa-refresh me-1"/>Refresh
+                    </button>
+                </div>
+
+                <!-- INCOMING -->
+                <h5 class="o_cash_section text-success">
+                    <i class="fa fa-arrow-down me-2"/>Receivables — money coming IN
+                </h5>
+                <div class="row g-3 mb-4">
+                    <t t-foreach="incoming" t-as="bucket" t-key="bucket.key">
+                        <div class="col-md-4">
+                            <t t-call="mv_cash_radar.Card"/>
+                        </div>
+                    </t>
+                </div>
+
+                <!-- OUTGOING -->
+                <h5 class="o_cash_section text-warning">
+                    <i class="fa fa-arrow-up me-2"/>Payables — money going OUT
+                </h5>
+                <div class="row g-3">
+                    <t t-foreach="outgoing" t-as="bucket" t-key="bucket.key">
+                        <div class="col-md-4">
+                            <t t-call="mv_cash_radar.Card"/>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </div>
+    </t>
+
+    <!-- A single bucket card. Expects `bucket` in scope. -->
+    <t t-name="mv_cash_radar.Card" owl="1">
+        <div t-att-class="cardClass(bucket)">
+            <div class="o_cash_card_head" t-on-click="() => this.openBucket(bucket)">
+                <div class="o_cash_card_label">
+                    <i t-att-class="'fa ' + bucket.icon + ' me-2'"/>
+                    <span t-esc="bucket.label"/>
+                </div>
+                <t t-if="bucket.overdue and bucket.count">
+                    <span class="o_cash_flag">OVERDUE</span>
+                </t>
+            </div>
+            <div class="o_cash_card_amount" t-on-click="() => this.openBucket(bucket)">
+                <span t-esc="money(bucket.total)"/>
+            </div>
+            <div class="o_cash_card_sub">
+                <span class="o_cash_count" t-esc="bucket.count"/>
+                <span t-esc="bucket.count === 1 ? ' item' : ' items'"/>
+                <span class="o_cash_dot">·</span>
+                <span t-esc="bucket.subtitle"/>
+            </div>
+
+            <t t-if="bucket.records.length">
+                <div class="o_cash_preview">
+                    <t t-foreach="bucket.records" t-as="rec" t-key="rec.id">
+                        <div class="o_cash_preview_row" t-on-click="() => this.openRecord(bucket, rec.id)">
+                            <div class="o_cash_preview_main">
+                                <strong t-esc="rec.name"/>
+                                <small t-if="rec.partner" class="text-muted d-block" t-esc="rec.partner"/>
+                            </div>
+                            <div class="o_cash_preview_meta text-end">
+                                <span t-esc="money(rec.amount)"/>
+                                <small t-if="rec.date" class="text-muted d-block" t-esc="rec.date"/>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+                <div class="o_cash_card_foot" t-on-click="() => this.openBucket(bucket)">
+                    View all <span t-esc="bucket.count"/> →
+                </div>
+            </t>
+            <t t-else="">
+                <div class="o_cash_empty">Nothing here — nice. ✅</div>
+            </t>
+        </div>
+    </t>
+</templates>

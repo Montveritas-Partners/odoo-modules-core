@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Daily morning nag: emails the digest and drops one in-app activity. -->
+    <record id="ir_cron_cash_radar_digest" model="ir.cron">
+        <field name="name">Receivables &amp; Payables: Daily Digest</field>
+        <field name="model_id" ref="model_mv_cash_radar"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_send_digest()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">True</field>
+        <!-- 7:00 server time; recompute nextcall on install. -->
+        <field name="nextcall" eval="(DateTime.now().replace(hour=7, minute=0, second=0) + relativedelta(days=1))"/>
+    </record>
+</odoo>

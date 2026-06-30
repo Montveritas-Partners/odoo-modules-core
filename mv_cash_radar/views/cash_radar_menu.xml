@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- OWL client action: the Receivables & Payables dashboard -->
+    <record id="action_cash_radar_dashboard" model="ir.actions.client">
+        <field name="name">Receivables &amp; Payables</field>
+        <field name="tag">mv_cash_radar_dashboard</field>
+    </record>
+
+    <!-- A header inside the Invoicing app, alongside Customers / Vendors / Reporting -->
+    <menuitem id="menu_cash_radar_root"
+              name="Receivables &amp; Payables"
+              parent="account.menu_finance"
+              action="action_cash_radar_dashboard"
+              sequence="5"/>
+</odoo>

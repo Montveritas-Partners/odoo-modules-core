@@ -1,0 +1,123 @@
+.o_cash_radar {
+    background: #f4f6f9;
+    min-height: 100vh;
+
+    .o_cash_title {
+        font-weight: 700;
+        color: #1a2733;
+    }
+
+    .o_cash_section {
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 0.5rem;
+    }
+
+    // --- Card shell ---------------------------------------------------------
+    .o_cash_card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 18px 20px;
+        height: 100%;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        border-left: 6px solid #ccc;
+        transition: transform 0.08s ease, box-shadow 0.08s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+    }
+
+    // Direction = colour family.
+    .o_cash_incoming {
+        border-left-color: #1e8449; // green
+        .o_cash_card_amount { color: #1e8449; }
+    }
+    .o_cash_outgoing {
+        border-left-color: #b9770e; // amber
+        .o_cash_card_amount { color: #b9770e; }
+    }
+    // Overdue = red, regardless of direction — this is the "HEY!" state.
+    .o_cash_overdue {
+        border-left-color: #c0392b;
+        background: #fff5f4;
+        animation: cashPulse 2.4s ease-in-out infinite;
+        .o_cash_card_amount { color: #c0392b; }
+    }
+
+    @keyframes cashPulse {
+        0%, 100% { box-shadow: 0 2px 8px rgba(192, 57, 43, 0.15); }
+        50%      { box-shadow: 0 4px 18px rgba(192, 57, 43, 0.45); }
+    }
+
+    // --- Card internals -----------------------------------------------------
+    .o_cash_card_head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+    }
+    .o_cash_card_label {
+        font-weight: 600;
+        color: #33475b;
+        font-size: 0.95rem;
+    }
+    .o_cash_flag {
+        background: #c0392b;
+        color: #fff;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 10px;
+        letter-spacing: 0.05em;
+    }
+    .o_cash_card_amount {
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1.2;
+        margin: 6px 0 2px;
+        cursor: pointer;
+    }
+    .o_cash_card_sub {
+        font-size: 0.8rem;
+        color: #8a97a6;
+        margin-bottom: 8px;
+        .o_cash_count { font-weight: 700; color: #5b6b7b; }
+        .o_cash_dot { margin: 0 5px; }
+    }
+
+    .o_cash_preview {
+        border-top: 1px solid #eef1f5;
+        margin-top: 6px;
+    }
+    .o_cash_preview_row {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 7px 2px;
+        border-bottom: 1px solid #f2f4f7;
+        cursor: pointer;
+        font-size: 0.85rem;
+
+        &:hover { background: #f8fafc; }
+        .o_cash_preview_main strong { color: #33475b; }
+    }
+
+    .o_cash_card_foot {
+        margin-top: 8px;
+        text-align: right;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #1a6fbf;
+        cursor: pointer;
+        &:hover { text-decoration: underline; }
+    }
+
+    .o_cash_empty {
+        margin-top: 8px;
+        color: #8a97a6;
+        font-size: 0.85rem;
+    }
+}
