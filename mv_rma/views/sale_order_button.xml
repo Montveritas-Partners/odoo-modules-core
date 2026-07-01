@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_inherit_rma" model="ir.ui.view">
+        <field name="name">sale.order.form.rma</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_rma" type="object"
+                        class="oe_stat_button" icon="fa-refresh"
+                        invisible="rma_count == 0">
+                    <field name="rma_count" widget="statinfo" string="RMAs"/>
+                </button>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button name="action_create_rma" type="object" string="Create RMA"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

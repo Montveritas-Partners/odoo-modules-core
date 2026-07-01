@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="seq_sale_rma" model="ir.sequence">
+        <field name="name">Sale RMA</field>
+        <field name="code">sale.rma</field>
+        <field name="prefix">RMA/%(year)s/</field>
+        <field name="padding">5</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        <field name="use_date_range" eval="True"/>
+    </record>
+</odoo>

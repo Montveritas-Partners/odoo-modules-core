@@ -2,7 +2,7 @@
     'name': 'Receivables & Payables',
     'summary': 'Adds a Receivables & Payables dashboard inside the Invoicing app plus a daily digest, flagging money to collect (invoices to send, overdue receivables) and money going out (vendor bills due), colour-coded by direction.',
     'version': '19.0.1.0.0',
-    'license': 'MIT',
+    'license': 'Other OSI approved licence',
     'author': 'Montveritas',
     'website': 'https://github.com/Montveritas-Partners/odoo-modules-core',
     'category': 'Accounting/Accounting',
